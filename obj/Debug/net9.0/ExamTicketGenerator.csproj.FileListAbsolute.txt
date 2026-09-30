@@ -22,3 +22,4 @@ D:\University\Ahramenco\csharp\obj\Debug\net9.0\refint\ExamTicketGenerator.dll
 D:\University\Ahramenco\csharp\obj\Debug\net9.0\ExamTicketGenerator.pdb
 D:\University\Ahramenco\csharp\obj\Debug\net9.0\ExamTicketGenerator.genruntimeconfig.cache
 D:\University\Ahramenco\csharp\obj\Debug\net9.0\ref\ExamTicketGenerator.dll
+D:\University\Ahramenco\csharp\obj\Debug\net9.0\ExamTicketGenerator.sourcelink.json

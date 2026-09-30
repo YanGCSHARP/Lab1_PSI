@@ -110,3 +110,4 @@ D:\University\Ahramenco\csharp\tests\obj\Debug\net9.0\refint\ExamTicketGenerator
 D:\University\Ahramenco\csharp\tests\obj\Debug\net9.0\ExamTicketGenerator.Tests.pdb
 D:\University\Ahramenco\csharp\tests\obj\Debug\net9.0\ExamTicketGenerator.Tests.genruntimeconfig.cache
 D:\University\Ahramenco\csharp\tests\obj\Debug\net9.0\ref\ExamTicketGenerator.Tests.dll
+D:\University\Ahramenco\csharp\tests\obj\Debug\net9.0\ExamTicketGenerator.Tests.sourcelink.json

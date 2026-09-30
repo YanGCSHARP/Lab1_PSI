@@ -26,5 +26,36 @@ namespace ExamTicketGenerator.Tests
 
             Assert.Null(result);
         }
+
+        [Theory]
+        [InlineData("Ivanov")]
+        [InlineData("Иванов")]
+        [InlineData("Ёлкин")]
+        [InlineData("Петров-Водкин")]
+        [InlineData("O'Brien")]
+        [InlineData("Petrov Sidorov")]
+        public void IsValid_ReturnsTrue_ForLettersWithSingleSeparators(string name)
+        {
+            Assert.True(NameValidator.IsValid(name));
+        }
+
+        [Theory]
+        [InlineData("Ivanov1")]
+        [InlineData("123")]
+        [InlineData("Ivan_ov")]
+        [InlineData("Ivanov!")]
+        [InlineData("@Ivanov")]
+        [InlineData("Ivan.ov")]
+        [InlineData("-Ivanov")]
+        [InlineData("Ivanov-")]
+        [InlineData("Petrov--Vodkin")]
+        [InlineData("Petrov  Sidorov")]
+        [InlineData("\bIvanov")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void IsValid_ReturnsFalse_ForDigitsAndOtherSymbols(string? name)
+        {
+            Assert.False(NameValidator.IsValid(name));
+        }
     }
 }

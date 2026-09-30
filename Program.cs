@@ -108,6 +108,44 @@ namespace ExamTicketGenerator
             var trimmed = (raw ?? string.Empty).Trim();
             return trimmed.Length == 0 ? null : trimmed;
         }
+
+        /// <summary>
+        /// Проверяет, что строка состоит только из букв (любого
+        /// алфавита). Между буквами допускается одиночный разделитель:
+        /// пробел, дефис или апостроф (например, "Петров-Водкин",
+        /// "O'Brien"). Цифры и прочие символы не допускаются.
+        /// </summary>
+        public static bool IsValid(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
+
+            var previousIsLetter = false;
+            foreach (var symbol in name)
+            {
+                if (char.IsLetter(symbol))
+                {
+                    previousIsLetter = true;
+                    continue;
+                }
+
+                if (!IsSeparator(symbol) || !previousIsLetter)
+                {
+                    return false;
+                }
+
+                previousIsLetter = false;
+            }
+
+            return previousIsLetter;
+        }
+
+        private static bool IsSeparator(char symbol)
+        {
+            return symbol == ' ' || symbol == '-' || symbol == '\'';
+        }
     }
 
     /// <summary>
@@ -141,10 +179,14 @@ namespace ExamTicketGenerator
     }
 
     /// <summary>
-    /// Отвечает за консольный ввод с проверкой ESC и пустых строк.
+    /// Отвечает за консольный ввод с проверкой ESC, пустых строк и
+    /// недопустимых символов.
     /// </summary>
     internal sealed class StudentInputReader
     {
+        private const string InvalidSymbolsMessage =
+            "Допустимы только буквы, а между ними — пробел, дефис или апостроф. Повторите ввод.";
+
         /// <summary>
         /// Считывает фамилию и имя. Возвращает null, если пользователь
         /// нажал ESC в момент ожидания ввода фамилии.
@@ -184,6 +226,12 @@ namespace ExamTicketGenerator
                     continue;
                 }
 
+                if (!NameValidator.IsValid(lastName))
+                {
+                    Console.WriteLine(InvalidSymbolsMessage);
+                    continue;
+                }
+
                 return lastName;
             }
         }
@@ -197,6 +245,12 @@ namespace ExamTicketGenerator
                 if (value is null)
                 {
                     Console.WriteLine(emptyMessage);
+                    continue;
+                }
+
+                if (!NameValidator.IsValid(value))
+                {
+                    Console.WriteLine(InvalidSymbolsMessage);
                     continue;
                 }
 
